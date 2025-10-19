@@ -84,7 +84,7 @@ jobs:
         python3 school_photo_downloader.py --config config.yaml --days-back $DAYS_BACK
         
     - name: Upload logs as artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()  # Upload logs even if the job fails
       with:
         name: school-photos-logs-${{ github.run_number }}
