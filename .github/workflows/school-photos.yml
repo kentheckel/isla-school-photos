@@ -64,6 +64,9 @@ jobs:
         logging:
           level: "INFO"
           file: "logs/school_photos.log"
+        downloads:
+          temp_folder: "temp_downloads"
+          max_file_size: 10485760
         temp_folder: "temp_downloads"
         max_file_size: 10485760
         EOF
