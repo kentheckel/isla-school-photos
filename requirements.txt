@@ -1,0 +1,20 @@
+# Email monitoring and processing dependencies
+imaplib2==3.6
+
+# Google Photos API
+google-auth==2.23.4
+google-auth-oauthlib==1.1.0
+google-auth-httplib2==0.1.1
+google-api-python-client==2.108.0
+
+# Image processing and utilities
+Pillow==10.1.0
+python-dateutil==2.8.2
+requests==2.31.0
+
+# Configuration and logging
+python-dotenv==1.0.0
+pyyaml==6.0.1
+
+# Scheduling (optional - for running as a service)
+schedule==1.2.0

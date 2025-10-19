@@ -1,0 +1,46 @@
+# Sensitive configuration files
+config_local.yaml
+config.yaml
+
+# Google Photos credentials and tokens
+google_photos_credentials.json
+google_photos_token.json
+
+# Temporary files
+temp_downloads/
+*.tmp
+
+# Log files
+*.log
+logs/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test files
+test_*.jpg
+test_*.jpeg
+test_*.png
+
+# Downloaded photos (for testing)
+downloaded_photos/

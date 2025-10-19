@@ -1,0 +1,111 @@
+name: School Photos Downloader
+
+# This workflow runs every Friday at 7:00 PM EST (when school emails typically arrive)
+# and automatically downloads and uploads school photos to Google Photos
+on:
+  schedule:
+    # Run every Friday at 7:00 PM EST (midnight UTC on Saturday)
+    # Cron format: minute hour day month day-of-week
+    - cron: '0 0 * * 5'  # Friday at midnight UTC (7 PM EST previous day)
+  
+  # Allow manual triggering for testing
+  workflow_dispatch:
+    inputs:
+      days_back:
+        description: 'Number of days to look back for emails'
+        required: false
+        default: '7'
+        type: string
+
+jobs:
+  download-and-upload-photos:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Create necessary directories
+      run: |
+        mkdir -p temp_downloads
+        mkdir -p logs
+        
+    - name: Configure email credentials
+      env:
+        EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
+        EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+        SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
+      run: |
+        # Create config.yaml with secrets
+        cat > config.yaml << EOF
+        email:
+          imap_server: "imap.gmail.com"
+          imap_port: 993
+          use_ssl: true
+          username: "$EMAIL_USERNAME"
+          password: "$EMAIL_PASSWORD"
+          sender_email: "$SENDER_EMAIL"
+          subject_keywords: ["[Westshore Montessori School ]"]
+          check_frequency_minutes: 60
+        google_photos:
+          credentials_file: "google_photos_credentials.json"
+          token_file: "google_photos_token.json"
+          album_name: "School Photos"
+        logging:
+          level: "INFO"
+          file: "logs/school_photos.log"
+        temp_folder: "temp_downloads"
+        max_file_size: 10485760
+        EOF
+        
+    - name: Configure Google Photos credentials
+      env:
+        GOOGLE_PHOTOS_CREDENTIALS: ${{ secrets.GOOGLE_PHOTOS_CREDENTIALS }}
+      run: |
+        # Create Google Photos credentials file from secret
+        echo "$GOOGLE_PHOTOS_CREDENTIALS" > google_photos_credentials.json
+        
+    - name: Run school photo downloader
+      env:
+        DAYS_BACK: ${{ github.event.inputs.days_back || '7' }}
+      run: |
+        echo "Starting school photo download and upload process..."
+        echo "Looking back $DAYS_BACK days for school emails"
+        python3 school_photo_downloader.py --config config.yaml --days-back $DAYS_BACK
+        
+    - name: Upload logs as artifact
+      uses: actions/upload-artifact@v3
+      if: always()  # Upload logs even if the job fails
+      with:
+        name: school-photos-logs-${{ github.run_number }}
+        path: logs/
+        
+    - name: Clean up sensitive files
+      if: always()  # Always clean up, even if job fails
+      run: |
+        rm -f google_photos_credentials.json
+        rm -f google_photos_token.json
+        rm -f config.yaml
+        rm -rf temp_downloads/
+        
+    - name: Notify on success
+      if: success()
+      run: |
+        echo "✅ School photos successfully downloaded and uploaded to Google Photos!"
+        echo "Check your Google Photos library for new photos from Westshore Montessori School."
+        
+    - name: Notify on failure
+      if: failure()
+      run: |
+        echo "❌ School photo download/upload failed!"
+        echo "Check the logs artifact for more details."

@@ -1,0 +1,345 @@
+Delivered-To: kent.heckel@gmail.com
+Received: by 2002:a05:6f02:8491:b0:fc:424a:9df with SMTP id y17csp6577028rce;
+        Fri, 17 Oct 2025 15:46:57 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHwpyqh++BV8e9blCy9nsoA3uD7rYHp+Tv/Esj323kdky5ae7NiANCsH05MWRPihDXz4ihy
+X-Received: by 2002:a05:6a21:328a:b0:334:8dcb:567b with SMTP id adf61e73a8af0-334a8643d4amr7329987637.52.1760741217486;
+        Fri, 17 Oct 2025 15:46:57 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1760741217; cv=none;
+        d=google.com; s=arc-20240605;
+        b=TWH45Xb29MBKGHDf8/bjGv67h7OX/VYibpF0pV+xOIJKUT7zo282io4L7n3HVQ88eC
+         mMus1H1AgyXPLRGIsZKNFpHjgcSNR9bRTPLJFkHxwM3LdaOzrLjNzFi3AGyqIiVAZo7g
+         OfMpgALosOnxwnyKmuNiBeKzdeBhbBGrr0byjcBv0EEi9F9KVYxZ48Pl7PBbuezwmUGl
+         k/SyQrm7/Pk8gyIB2jlGSMLTVBhI5wEtkuOc+Wpuca0VvoS6kEyLycv90jX6DT6dIvcR
+         qqdNYeJxI6MbldJuOYRnDek3aHNirx1XsZMHew+TL3kUrcK9hS3LMs0pKFKJuYM7GAO8
+         ntGg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=to:reply-to:layout:content-transfer-encoding:mime-version:subject
+         :message-id:from:date:dkim-signature:dkim-signature;
+        bh=Ds89/zKnF4bnxo57KZOMPDlEp6mCBxV5YhcJFCspLLs=;
+        fh=j1dFiqDVcaS56Y1fngkzvyru3O5PRxV19/7XkbwrGDU=;
+        b=SrfwWgfta0wAWd61KbdzT0l7tbZYbJf5QunmXhp+JcnXmCRmEvbBL4GeIWd5OIHF+X
+         FjqkX6Z7KKfd1RsA1T733J3hQrhm7+8mF9dMtDmhXwCb9YRUvFopzyxtLAI41xjKuVWm
+         SPtIbnh2qrFWfkfwB5Ad94xCoH+LeUViUdLC3buEgadiOvR2gHJC25zcNWcMTsM6HanA
+         e8/u4HaOY9CAZbXhQ8LuYptSgFukqvgVJlCtSjUn4TyuxIsIxWVRCif5MrSjTNmTepxG
+         1AE9wB3+Bnjrevgj1FipMWiJzlKsJi3XGDe/sh9DgjtAMIhsIuWkyxjs7ZY/q/zxmNdu
+         8bRA==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@transparentclassroom.com header.s=s1 header.b=pQBjIDxL;
+       dkim=pass header.i=@sendgrid.info header.s=smtpapi header.b=TNeVoXUJ;
+       spf=pass (google.com: domain of bounces+109975-e810-kent.heckel=gmail.com@mail.transparentclassroom.com designates 159.183.104.248 as permitted sender) smtp.mailfrom="bounces+109975-e810-kent.heckel=gmail.com@mail.transparentclassroom.com";
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=transparentclassroom.com
+Return-Path: <bounces+109975-e810-kent.heckel=gmail.com@mail.transparentclassroom.com>
+Received: from o2.ptr5139.transparentclassroom.com (o2.ptr5139.transparentclassroom.com. [159.183.104.248])
+        by mx.google.com with ESMTPS id 41be03b00d2f7-b6a76b6a09asi451875a12.1113.2025.10.17.15.46.56
+        for <kent.heckel@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 17 Oct 2025 15:46:57 -0700 (PDT)
+Received-SPF: pass (google.com: domain of bounces+109975-e810-kent.heckel=gmail.com@mail.transparentclassroom.com designates 159.183.104.248 as permitted sender) client-ip=159.183.104.248;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@transparentclassroom.com header.s=s1 header.b=pQBjIDxL;
+       dkim=pass header.i=@sendgrid.info header.s=smtpapi header.b=TNeVoXUJ;
+       spf=pass (google.com: domain of bounces+109975-e810-kent.heckel=gmail.com@mail.transparentclassroom.com designates 159.183.104.248 as permitted sender) smtp.mailfrom="bounces+109975-e810-kent.heckel=gmail.com@mail.transparentclassroom.com";
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=transparentclassroom.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=transparentclassroom.com;
+	h=date:from:subject:mime-version:content-type:content-transfer-encoding:
+	reply-to:to:cc:content-type:date:feedback-id:from:subject:to;
+	s=s1; bh=Ds89/zKnF4bnxo57KZOMPDlEp6mCBxV5YhcJFCspLLs=;
+	b=pQBjIDxLqS8KyDjtehMBnPXn7W87opWrxjDb0U5T2iYwR3JoZOZbmCJaWutnjCy4nNN7
+	U8zfaJ3YthcCSgu8O/Ve9iN1l1xVgdHajOiBVkAemSLosNAEx/ds0Iz1U6TZ9AbjAPb0yK
+	Nxy4lK7OWNIi4e1itDinraAQtkhBWEX04zr9goTZCUjfu7uNn2bFXozuzAerHyfGOiEUOm
+	1xJ9VV9bCN2tl6NeGNnWc+hXEU29X1XZ6Bx/KkWOzCLr027NDNpJ6j2BBjL93wggSSSQhi
+	HtQ1c9yiNV++cmfh9YxpxPaV059MXbgb82Ept7dOJwos0qxUH5iREao9nKKSd4jg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sendgrid.info;
+	h=date:from:subject:mime-version:content-type:content-transfer-encoding:
+	reply-to:to:cc:content-type:date:feedback-id:from:subject:to;
+	s=smtpapi; bh=Ds89/zKnF4bnxo57KZOMPDlEp6mCBxV5YhcJFCspLLs=;
+	b=TNeVoXUJcbxFpUby71WOPIAHth0z0MDD37bnDsNrGjkMZ5kklP6Dcbl1O3IeYc5ITi+K
+	6LEiWlM/Mq5xBDQmNmtGHartSKqiamc/3/NqNSBhXEFHxEk6o7yFJdkmt0gDoLHseIjzdG
+	w6eaJLuK8HMwn4H/OhXoVPEoiqOz1F/TQ=
+Received: by recvd-7487445b-vps9t with SMTP id recvd-7487445b-vps9t-1-68F2C760-6
+	2025-10-17 22:46:56.309485622 +0000 UTC m=+11685729.081448887
+Received: from heroku.com (unknown)
+	by geopod-ismtpd-0 (SG) with ESMTP
+	id pQMxwYO0RzGlWr75Cuktmg
+	for <kent.heckel@gmail.com>;
+	Fri, 17 Oct 2025 22:46:56.260 +0000 (UTC)
+Date: Fri, 17 Oct 2025 22:46:56 +0000 (UTC)
+From: Westshore Montessori School <notifications@transparentclassroom.com>
+Message-ID: <68f2c76014751_258f01150959@d0ee7713-c531-4140-bca7-53e35cd59608.mail>
+Subject: [Westshore Montessori School ] 7 photo(s) with Isla
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="--==_mimepart_68f2c7601322f_258f01150873"
+Content-Transfer-Encoding: 7bit
+layout: email
+Reply-To: Westshore Montessori School <info@westshoremontessori.org>
+X-SG-EID: 
+ =?us-ascii?Q?u001=2Efb2TlxP7B4Ynx4ss9GrvrZ9AfmIT=2F9CeuKYXgO5LFFca6XmOfnCzNqadX?=
+ =?us-ascii?Q?+1v3wA0qpt+Moay5XgmvxFvqY6Ow3Iem9eyukdB?=
+ =?us-ascii?Q?tLRWr4l2HnwjG7qT9776Aj23cCgl9egfpovWf3D?=
+ =?us-ascii?Q?Ur1goZ5kSgHljBP74hxLqL9Jl8IIgRB88y51+tX?=
+ =?us-ascii?Q?B93a3Q2MZZFydT0by46cupCnCMnK9jf2aCjzc1p?=
+ =?us-ascii?Q?QXk4JChidcWLRUgWra2Yjy9DJeQTvoNBqYqSTsP?=
+ =?us-ascii?Q?Pbr9uttgqCDOo9ajsNuNIZQIABwfids8th24=2F9n?=
+ =?us-ascii?Q?dxyADnT4=3D?=
+To: Kent Heckel <kent.heckel@gmail.com>
+X-Entity-ID: u001.RYzUcpGP9MOzwbtQiVqOqQ==
+
+
+----==_mimepart_68f2c7601322f_258f01150873
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+
+Nancy tagged a photo:
+
+Ada O 
+( https://www.transparentclassroom.com/s/5442/children/623349 )
+Alina E 
+( https://www.transparentclassroom.com/s/5442/children/745013 )
+Eliana S 
+( https://www.transparentclassroom.com/s/5442/children/692213 )
+Fiona S 
+( https://www.transparentclassroom.com/s/5442/children/623523 )
+Harriet R 
+( https://www.transparentclassroom.com/s/5442/children/623464 )
+Isla H 
+( https://www.transparentclassroom.com/s/5442/children/623489 )
+Miriam R 
+( https://www.transparentclassroom.com/s/5442/children/623465 )
+Nadiya E 
+( https://www.transparentclassroom.com/s/5442/children/623521 )
+Patrick L 
+( https://www.transparentclassroom.com/s/5442/children/623527 )
+Penelope E 
+( https://www.transparentclassroom.com/s/5442/children/623530 )
+Peter M 
+( https://www.transparentclassroom.com/s/5442/children/623463 )
+Remington L 
+( https://www.transparentclassroom.com/s/5442/children/623506 )
+Roya R 
+( https://www.transparentclassroom.com/s/5442/children/692218 )
+Saiyuri S 
+( https://www.transparentclassroom.com/s/5442/children/623351 )
+Theodore (Teddy) E 
+( https://www.transparentclassroom.com/s/5442/children/623525 )
+Wade F 
+( https://www.transparentclassroom.com/s/5442/children/745012 )
+William C 
+( https://www.transparentclassroom.com/s/5442/children/692657 )
+#SchoolLibrary
+-----------------------------------------------------------------
+
+Nancy tagged a photo:
+
+Isla H 
+( https://www.transparentclassroom.com/s/5442/children/623489 ) The
+Red Cards and Counters: Introduction 
+( https://www.transparentclassroom.com/s/5442/lesson_sets/13908/lessons/10973864 )
+
+-----------------------------------------------------------------
+
+Nancy tagged a photo:
+
+Isla H 
+( https://www.transparentclassroom.com/s/5442/children/623489 )
+Using a Crumber 
+( https://www.transparentclassroom.com/s/5442/lesson_sets/13908/lessons/13444450 )
+
+-----------------------------------------------------------------
+
+Nancy tagged a photo:
+
+Isla H 
+( https://www.transparentclassroom.com/s/5442/children/623489 )
+Building/Labeling Parts of a Pumpkin 
+( https://www.transparentclassroom.com/s/5442/lesson_sets/13908/lessons/13465270 )
+
+-----------------------------------------------------------------
+
+Nancy tagged a photo:
+
+Isla H 
+( https://www.transparentclassroom.com/s/5442/children/623489 )
+Living and Non-Living 
+( https://www.transparentclassroom.com/s/5442/lesson_sets/13908/lessons/13715274 )
+
+-----------------------------------------------------------------
+
+Nancy tagged a photo:
+
+Isla H 
+( https://www.transparentclassroom.com/s/5442/children/623489 )
+Life Cycle of an Apple Three Part Card 
+( https://www.transparentclassroom.com/s/5442/lesson_sets/13908/lessons/16573977 )
+
+-----------------------------------------------------------------
+
+Nancy tagged a photo:
+
+Isla H 
+( https://www.transparentclassroom.com/s/5442/children/623489 )
+Magnetic/non-magnetic 
+( https://www.transparentclassroom.com/s/5442/lesson_sets/13908/lessons/10973777 )
+
+-----------------------------------------------------------------
+
+Read more on Transparent Classroom 
+( https://www.transparentclassroom.com/s/5442/dashboard ).
+
+Unsubscribe 
+( https://www.transparentclassroom.com/subscriptions/unsubscribe/notify_on_photos_by_email?token=BpDXNz5ueJ26EB5gvNLx )
+ | Update Preferences 
+( https://www.transparentclassroom.com/subscriptions?token=BpDXNz5ueJ26EB5gvNLx )
+----==_mimepart_68f2c7601322f_258f01150873
+Content-Type: text/html; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8">
+  <style>
+    /* Email styles need to be inline */
+  </style>
+</head>
+<body>
+<p>Nancy tagged a photo:</p>
+<h4>
+<a href=3D"https://www.transparentclassroom.com/s/5442/children/623349" cla=
+ss=3D"child-link">Ada O</a> <a href=3D"https://www.transparentclassroom.com=
+/s/5442/children/745013" class=3D"child-link">Alina E</a> <a href=3D"https:=
+//www.transparentclassroom.com/s/5442/children/692213" class=3D"child-link"=
+>Eliana S</a> <a href=3D"https://www.transparentclassroom.com/s/5442/childr=
+en/623523" class=3D"child-link">Fiona S</a> <a href=3D"https://www.transpar=
+entclassroom.com/s/5442/children/623464" class=3D"child-link">Harriet R</a>=
+ <a href=3D"https://www.transparentclassroom.com/s/5442/children/623489" cl=
+ass=3D"child-link">Isla H</a> <a href=3D"https://www.transparentclassroom.c=
+om/s/5442/children/623465" class=3D"child-link">Miriam R</a> <a href=3D"htt=
+ps://www.transparentclassroom.com/s/5442/children/623521" class=3D"child-li=
+nk">Nadiya E</a> <a href=3D"https://www.transparentclassroom.com/s/5442/chi=
+ldren/623527" class=3D"child-link">Patrick L</a> <a href=3D"https://www.tra=
+nsparentclassroom.com/s/5442/children/623530" class=3D"child-link">Penelope=
+ E</a> <a href=3D"https://www.transparentclassroom.com/s/5442/children/6234=
+63" class=3D"child-link">Peter M</a> <a href=3D"https://www.transparentclas=
+sroom.com/s/5442/children/623506" class=3D"child-link">Remington L</a> <a h=
+ref=3D"https://www.transparentclassroom.com/s/5442/children/692218" class=
+=3D"child-link">Roya R</a> <a href=3D"https://www.transparentclassroom.com/=
+s/5442/children/623351" class=3D"child-link">Saiyuri S</a> <a href=3D"https=
+://www.transparentclassroom.com/s/5442/children/623525" class=3D"child-link=
+">Theodore (Teddy) E</a> <a href=3D"https://www.transparentclassroom.com/s/=
+5442/children/745012" class=3D"child-link">Wade F</a> <a href=3D"https://ww=
+w.transparentclassroom.com/s/5442/children/692657" class=3D"child-link">Wil=
+liam C</a> #SchoolLibrary</h4>
+<p><img src=3D"https://s3.amazonaws.com/transparentclassroom.com/schools/54=
+42/2025/posts/1be229efda612c50a5c6db81b40d9bfe67000b5dc631f645930cc587ce525=
+486.large.jpeg?X-Amz-Algorithm=3DAWS4-HMAC-SHA256&amp;X-Amz-Credential=3DAK=
+IA3YMBJBQHQ2H6UTOM%2F20251017%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Dat=
+e=3D20251017T224656Z&amp;X-Amz-Expires=3D604800&amp;X-Amz-SignedHeaders=3Dh=
+ost&amp;X-Amz-Signature=3D10bc9675ad22d35e0204e6e3ddc3a148a721afaf4d2cd99e1=
+8ed8a3791944ba5" alt=3D""></p>
+<hr>
+<p>Nancy tagged a photo:</p>
+<h4>
+<a href=3D"https://www.transparentclassroom.com/s/5442/children/623489" cla=
+ss=3D"child-link">Isla H</a> <a href=3D"https://www.transparentclassroom.co=
+m/s/5442/lesson_sets/13908/lessons/10973864" class=3D"lesson-link" data-id=
+=3D"10973864">The Red Cards and Counters: Introduction</a>
+</h4>
+<p><img src=3D"https://s3.amazonaws.com/transparentclassroom.com/schools/54=
+42/2025/posts/5902ba862219c48f74f4cc5136dd72d239b1129111dc5a4e18c3923c5fbf2=
+3f1.large.jpeg?X-Amz-Algorithm=3DAWS4-HMAC-SHA256&amp;X-Amz-Credential=3DAK=
+IA3YMBJBQHQ2H6UTOM%2F20251017%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Dat=
+e=3D20251017T224656Z&amp;X-Amz-Expires=3D604800&amp;X-Amz-SignedHeaders=3Dh=
+ost&amp;X-Amz-Signature=3D0a61348336b1a7993b1c58004606547f70410cf52ddc97cc8=
+73ab9756fbc45cb" alt=3D""></p>
+<hr>
+<p>Nancy tagged a photo:</p>
+<h4>
+<a href=3D"https://www.transparentclassroom.com/s/5442/children/623489" cla=
+ss=3D"child-link">Isla H</a> <a href=3D"https://www.transparentclassroom.co=
+m/s/5442/lesson_sets/13908/lessons/13444450" class=3D"lesson-link" data-id=
+=3D"13444450">Using a Crumber</a>
+</h4>
+<p><img src=3D"https://s3.amazonaws.com/transparentclassroom.com/schools/54=
+42/2025/posts/55819eee51ffbaab4ffc2f39d7428503631aecd0a01fafe475f749ca547ea=
+8ba.large.jpeg?X-Amz-Algorithm=3DAWS4-HMAC-SHA256&amp;X-Amz-Credential=3DAK=
+IA3YMBJBQHQ2H6UTOM%2F20251017%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Dat=
+e=3D20251017T224656Z&amp;X-Amz-Expires=3D604800&amp;X-Amz-SignedHeaders=3Dh=
+ost&amp;X-Amz-Signature=3D2a079e841a76c4feed6f0b924862cb2e96eb273574ef23a86=
+b5781f38b49210c" alt=3D""></p>
+<hr>
+<p>Nancy tagged a photo:</p>
+<h4>
+<a href=3D"https://www.transparentclassroom.com/s/5442/children/623489" cla=
+ss=3D"child-link">Isla H</a> <a href=3D"https://www.transparentclassroom.co=
+m/s/5442/lesson_sets/13908/lessons/13465270" class=3D"lesson-link" data-id=
+=3D"13465270">Building/Labeling Parts of a Pumpkin</a>
+</h4>
+<p><img src=3D"https://s3.amazonaws.com/transparentclassroom.com/schools/54=
+42/2025/posts/bdec7fa88568c9111d56c073c1df8bc148f1cc8e6545c5c98458776f70454=
+0b7.large.jpeg?X-Amz-Algorithm=3DAWS4-HMAC-SHA256&amp;X-Amz-Credential=3DAK=
+IA3YMBJBQHQ2H6UTOM%2F20251017%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Dat=
+e=3D20251017T224656Z&amp;X-Amz-Expires=3D604800&amp;X-Amz-SignedHeaders=3Dh=
+ost&amp;X-Amz-Signature=3D0ea2da12d4c1511a0fa8aedeb22f82ca805a949fa30fa7c0a=
+d80fe3c2056a93e" alt=3D""></p>
+<hr>
+<p>Nancy tagged a photo:</p>
+<h4>
+<a href=3D"https://www.transparentclassroom.com/s/5442/children/623489" cla=
+ss=3D"child-link">Isla H</a> <a href=3D"https://www.transparentclassroom.co=
+m/s/5442/lesson_sets/13908/lessons/13715274" class=3D"lesson-link" data-id=
+=3D"13715274">Living and Non-Living</a>
+</h4>
+<p><img src=3D"https://s3.amazonaws.com/transparentclassroom.com/schools/54=
+42/2025/posts/f3fcb9421de5d848adbb3e01b48f26931b1a48bb45589056089b75dd067fa=
+735.large.jpeg?X-Amz-Algorithm=3DAWS4-HMAC-SHA256&amp;X-Amz-Credential=3DAK=
+IA3YMBJBQHQ2H6UTOM%2F20251017%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Dat=
+e=3D20251017T224656Z&amp;X-Amz-Expires=3D604800&amp;X-Amz-SignedHeaders=3Dh=
+ost&amp;X-Amz-Signature=3D40eff658b35d48d2cbfdb1babf4b66e411567725fab12be98=
+ac545c096a77a7f" alt=3D""></p>
+<hr>
+<p>Nancy tagged a photo:</p>
+<h4>
+<a href=3D"https://www.transparentclassroom.com/s/5442/children/623489" cla=
+ss=3D"child-link">Isla H</a> <a href=3D"https://www.transparentclassroom.co=
+m/s/5442/lesson_sets/13908/lessons/16573977" class=3D"lesson-link" data-id=
+=3D"16573977">Life Cycle of an Apple Three Part Card</a>
+</h4>
+<p><img src=3D"https://s3.amazonaws.com/transparentclassroom.com/schools/54=
+42/2025/posts/af9580f6d433556f303ad6f15e0d28811d3008d6fd6bc33fad6da7ff52c7f=
+279.large.jpeg?X-Amz-Algorithm=3DAWS4-HMAC-SHA256&amp;X-Amz-Credential=3DAK=
+IA3YMBJBQHQ2H6UTOM%2F20251017%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Dat=
+e=3D20251017T224656Z&amp;X-Amz-Expires=3D604800&amp;X-Amz-SignedHeaders=3Dh=
+ost&amp;X-Amz-Signature=3Dd8d405878b9db9e4f07259d163a03c762870cc57608720fc1=
+24ed086ef7c1a91" alt=3D""></p>
+<hr>
+<p>Nancy tagged a photo:</p>
+<h4>
+<a href=3D"https://www.transparentclassroom.com/s/5442/children/623489" cla=
+ss=3D"child-link">Isla H</a> <a href=3D"https://www.transparentclassroom.co=
+m/s/5442/lesson_sets/13908/lessons/10973777" class=3D"lesson-link" data-id=
+=3D"10973777">Magnetic/non-magnetic</a>
+</h4>
+<p><img src=3D"https://s3.amazonaws.com/transparentclassroom.com/schools/54=
+42/2025/posts/19cb2fd1aec3a26af4d41ca9041b31253c94a676bcde63e2009687997b79f=
+4f4.large.jpeg?X-Amz-Algorithm=3DAWS4-HMAC-SHA256&amp;X-Amz-Credential=3DAK=
+IA3YMBJBQHQ2H6UTOM%2F20251017%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Dat=
+e=3D20251017T224656Z&amp;X-Amz-Expires=3D604800&amp;X-Amz-SignedHeaders=3Dh=
+ost&amp;X-Amz-Signature=3D1833bc6bd4cffb6dec72f4d07a96cfd3f5b9f81b05f17e693=
+67998e01ee339ae" alt=3D""></p>
+<hr>
+<div style=3D"color: silver; font-size: 0.9em; margin-top: 16px;">
+<p>Read more on <a href=3D"https://www.transparentclassroom.com/s/5442/dash=
+board">Transparent Classroom</a>.</p>
+<p><a style=3D"color: silver;" href=3D"https://www.transparentclassroom.com=
+/subscriptions/unsubscribe/notify_on_photos_by_email?token=3DBpDXNz5ueJ26EB=
+5gvNLx">Unsubscribe</a> | <a style=3D"color: silver;" href=3D"https://www.t=
+ransparentclassroom.com/subscriptions?token=3DBpDXNz5ueJ26EB5gvNLx">Update =
+Preferences</a></p>
+</div>
+
+</body>
+</html>
+
+----==_mimepart_68f2c7601322f_258f01150873--
