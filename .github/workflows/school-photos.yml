@@ -63,7 +63,7 @@ jobs:
           album_name: "School Photos"
         logging:
           level: "INFO"
-          file: "logs/school_photos.log"
+          log_file: "logs/school_photos.log"
         downloads:
           temp_folder: "temp_downloads"
           max_file_size: 10485760
