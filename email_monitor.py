@@ -38,9 +38,46 @@ class EmailMonitor:
         self.password = config['email']['password']
         self.sender_email = config['email']['sender_email']
         self.subject_keywords = config['email']['subject_keywords']
-        self.supported_formats = config['downloads']['supported_formats']
-        self.temp_folder = config['downloads']['temp_folder']
-        self.max_file_size = config['downloads']['max_file_size_mb'] * 1024 * 1024  # Convert to bytes
+        # Downloads-related configuration. Use defensive defaults so missing keys in config
+        # do not crash the CI/GitHub Actions run. This also makes local runs more resilient
+        # if a user copies a minimal config.
+        #
+        # Defaults chosen:
+        # - supported_formats: common image extensions we expect from school emails
+        # - temp_folder: a local folder under project root used for transient files
+        # - max_file_size_mb: a conservative 50MB cap to avoid downloading large/unexpected payloads
+        downloads_config = config.get('downloads', {})
+
+        # List of file extensions we consider images. Normalize to lowercase when comparing.
+        self.supported_formats = downloads_config.get(
+            'supported_formats',
+            [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff"]
+        )
+
+        # Folder used to store temporary downloads during processing.
+        self.temp_folder = downloads_config.get('temp_folder', './temp_downloads')
+
+        # Maximum file size expressed in bytes; incoming config value is in MB.
+        self.max_file_size = downloads_config.get('max_file_size_mb', 50) * 1024 * 1024
+
+        # Emit an informational log if we had to fall back to any default, to aid diagnostics
+        try:
+            if 'downloads' not in config:
+                logging.getLogger(__name__).info(
+                    "'downloads' section missing in config; using safe defaults for supported formats, temp folder, and file size."
+                )
+            else:
+                missing_keys = [
+                    key for key in ['supported_formats', 'temp_folder', 'max_file_size_mb']
+                    if key not in downloads_config
+                ]
+                if missing_keys:
+                    logging.getLogger(__name__).info(
+                        f"Missing downloads config keys {missing_keys}; using safe defaults where necessary."
+                    )
+        except Exception:
+            # If logging fails for any reason, do not interrupt initialization
+            pass
         
         # Set up logging
         self.logger = logging.getLogger(__name__)
